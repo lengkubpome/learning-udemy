@@ -1,26 +1,24 @@
 import {Component} from 'angular2/core';
 import { CoursesComponent } from './courses.component';
-import { AuthorsComponent } from './authors.component';
+import { FavoriteComponent } from './favorite.component';
 
 @Component({
     selector: 'my-app',
-    template: `<h1>Hello Angular</h1>
-                <courses></courses>
-                <authors></authors>
-                <br/>
-                <br/>
-                <div (click)="onDivClick()">
-                    <button (click)="onClick($event)">Submit</button>
-                </div>
+    template: `
+                <favorite [isFavorite]="post.isFavorite" 
+                    (change)="onFavoriteChange($event)"></favorite>
                 `,
-    directives: [CoursesComponent, AuthorsComponent]
+    // directives: [CoursesComponent, FavoriteComponent]
+    directives: [FavoriteComponent]
+
 })
 export class AppComponent { 
-    onDivClick(){
-        console.log("Handled by Div")
+    post = {
+        title:"Title",
+        isFavorite: true
     }
-    onClick($event){
-        $event.stopPropagation();
-        console.log("clicked", $event);
+
+    onFavoriteChange($event){
+        console.log($event);
     }
 }
