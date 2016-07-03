@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter} from 'angular2/core';
+import { AutoGrowDirective } from './auto-grow.directive';
 
 @Component({
     selector: 'favorite',
@@ -7,8 +8,10 @@ import { Component, Input, Output, EventEmitter} from 'angular2/core';
         .glyphicon-star {
             color: orange;
         }
-    `]
+    `],
+    directives: [AutoGrowDirective]
     //  inputs: ['isFavorite:is-favorite'],
+    
    
 })
 

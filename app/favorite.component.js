@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', './auto-grow.directive'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,15 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, auto_grow_directive_1;
     var FavoriteComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (auto_grow_directive_1_1) {
+                auto_grow_directive_1 = auto_grow_directive_1_1;
             }],
         execute: function() {
             FavoriteComponent = (function () {
@@ -40,7 +43,8 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     core_1.Component({
                         selector: 'favorite',
                         templateUrl: 'app/favorite.template.html',
-                        styles: ["\n        .glyphicon-star {\n            color: orange;\n        }\n    "]
+                        styles: ["\n        .glyphicon-star {\n            color: orange;\n        }\n    "],
+                        directives: [auto_grow_directive_1.AutoGrowDirective]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], FavoriteComponent);
