@@ -10,13 +10,13 @@ import { TweetService } from './tweet/tweet.service';
 @Component({
     selector: 'my-app',
     template: `
-<!--
+<!-- FavoriteComponent -->
                 <favorite [isFavorite]="post.isFavorite" 
                     (change)="onFavoriteChange($event)"></favorite>
-                <br />               
+<!-- LikeComponent -->              
                 <like [totalLikes]="tweet.totalLikes" [iLike]="tweet.iLike"></like>
                 <br/>
---?              
+            
 <!-- Chapter 40 : Code Review -->
                 <voter 
                     [voteCount]="post.voteCount"
@@ -29,6 +29,22 @@ import { TweetService } from './tweet/tweet.service';
                     <tweet [data]="tweet"></tweet>
 
                 </div>
+<!-- Chapter 45 : ngSwitch -->
+                <h1> Chapter 45 : ngSwitch </h1>
+
+                    <ul class="nav nav-pills">
+                        <li [class.active]="viewMode =='map'">
+                            <a (click)="viewMode = 'map'">Map View</a>
+                        </li>
+                        <li [class.active]="viewMode =='list'">
+                            <a (click)="viewMode = 'list'">List View</a>
+                        </li>
+                    </ul>
+                    <div [ngSwitch]="viewMode">
+                        <template [ngSwitchWhen]="'map'" ngSwitchDefault>Map View Content</template>
+                        <template [ngSwitchWhen]="'list'">List View Content</template>
+                    </div>
+
 
                 `,
     // directives: [CoursesComponent, FavoriteComponent]
@@ -65,6 +81,7 @@ export class AppComponent {
         this.tweets = tweetService.getTweet();
     }
 
-
+    //  Chapter 45 : ngSwitch
+    viewMode='map';
 
 }

@@ -48,6 +48,8 @@ System.register(['angular2/core', './favorite.component', './like.component', '.
                         totalLikes: 10,
                         iLike: false
                     };
+                    //  Chapter 45 : ngSwitch
+                    this.viewMode = 'map';
                     this.tweets = tweetService.getTweet();
                 }
                 AppComponent.prototype.onVote = function ($event) {
@@ -59,7 +61,7 @@ System.register(['angular2/core', './favorite.component', './like.component', '.
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n<!--\n                <favorite [isFavorite]=\"post.isFavorite\" \n                    (change)=\"onFavoriteChange($event)\"></favorite>\n                <br />               \n                <like [totalLikes]=\"tweet.totalLikes\" [iLike]=\"tweet.iLike\"></like>\n                <br/>\n--?              \n<!-- Chapter 40 : Code Review -->\n                <voter \n                    [voteCount]=\"post.voteCount\"\n                    [myVote]=\"post.myVote\"\n                    (vote)=\"onVote($event)\">\n                </voter>\n<!-- Chapter 41 : Code Review -->\n                <h1> Chapter 41 </h1>\n                <div *ngFor=\"#tweet of tweets\">\n                    <tweet [data]=\"tweet\"></tweet>\n\n                </div>\n\n                ",
+                        template: "\n<!-- FavoriteComponent -->\n                <favorite [isFavorite]=\"post.isFavorite\" \n                    (change)=\"onFavoriteChange($event)\"></favorite>\n<!-- LikeComponent -->              \n                <like [totalLikes]=\"tweet.totalLikes\" [iLike]=\"tweet.iLike\"></like>\n                <br/>\n            \n<!-- Chapter 40 : Code Review -->\n                <voter \n                    [voteCount]=\"post.voteCount\"\n                    [myVote]=\"post.myVote\"\n                    (vote)=\"onVote($event)\">\n                </voter>\n<!-- Chapter 41 : Code Review -->\n                <h1> Chapter 41 </h1>\n                <div *ngFor=\"#tweet of tweets\">\n                    <tweet [data]=\"tweet\"></tweet>\n\n                </div>\n<!-- Chapter 45 : ngSwitch -->\n                <h1> Chapter 45 : ngSwitch </h1>\n\n                    <ul class=\"nav nav-pills\">\n                        <li [class.active]=\"viewMode =='map'\">\n                            <a (click)=\"viewMode = 'map'\">Map View</a>\n                        </li>\n                        <li [class.active]=\"viewMode =='list'\">\n                            <a (click)=\"viewMode = 'list'\">List View</a>\n                        </li>\n                    </ul>\n                    <div [ngSwitch]=\"viewMode\">\n                        <template [ngSwitchWhen]=\"'map'\" ngSwitchDefault>Map View Content</template>\n                        <template [ngSwitchWhen]=\"'list'\">List View Content</template>\n                    </div>\n\n\n                ",
                         // directives: [CoursesComponent, FavoriteComponent]
                         directives: [favorite_component_1.FavoriteComponent, like_component_1.LikeComponent, voter_component_1.VoterComponent, tweet_component_1.TweetComponent],
                         providers: [tweet_service_1.TweetService]
