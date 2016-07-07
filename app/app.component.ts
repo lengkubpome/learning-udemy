@@ -4,25 +4,36 @@ import { FavoriteComponent } from './favorite.component';
 import { LikeComponent } from './like.component';
 import { VoterComponent } from './voter.component';
 
+import { TweetComponent } from './tweet/tweet.component';
+import { TweetService } from './tweet/tweet.service';
+
 @Component({
     selector: 'my-app',
     template: `
-
+<!--
                 <favorite [isFavorite]="post.isFavorite" 
                     (change)="onFavoriteChange($event)"></favorite>
                 <br />               
                 <like [totalLikes]="tweet.totalLikes" [iLike]="tweet.iLike"></like>
                 <br/>
-                
+--?              
 <!-- Chapter 40 : Code Review -->
                 <voter 
                     [voteCount]="post.voteCount"
                     [myVote]="post.myVote"
                     (vote)="onVote($event)">
                 </voter>
+<!-- Chapter 41 : Code Review -->
+                <h1> Chapter 41 </h1>
+                <div *ngFor="#tweet of tweets">
+                    <tweet [data]="tweet"></tweet>
+
+                </div>
+
                 `,
     // directives: [CoursesComponent, FavoriteComponent]
-    directives: [FavoriteComponent,LikeComponent,VoterComponent]
+    directives: [FavoriteComponent,LikeComponent,VoterComponent,TweetComponent],
+    providers: [TweetService]
 
 })
 export class AppComponent {
@@ -46,6 +57,12 @@ export class AppComponent {
     tweet = {
         totalLikes: 10,
         iLike: false
+    }
+
+    // Chapter 41
+    tweets: any[];
+    constructor(tweetService: TweetService){
+        this.tweets = tweetService.getTweet();
     }
 
 
