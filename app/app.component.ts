@@ -24,28 +24,48 @@ import { ZippyComponent } from './zippy/zippy.component';
                     [myVote]="post.myVote"
                     (vote)="onVote($event)">
                 </voter>
-<!-- Chapter 41 : Code Review -->
-                <h1> Chapter 41 </h1>
-                <div *ngFor="#tweet of tweets">
-                    <tweet [data]="tweet"></tweet>
-
-                </div>
-
+                
 <!-- Chapter 45 : ngSwitch -->
-                <h1> Chapter 45 : ngSwitch </h1>
-
+                <h4> Chapter 45 : ngSwitch </h4>
                     <ul class="nav nav-pills">
-                        <li [class.active]="viewMode =='map'">
-                            <a (click)="viewMode = 'map'">Map View</a>
+                        <li [class.active]="viewMode =='Chapter41'">
+                            <a (click)="viewMode = 'Chapter41'">Chapter 41 : Code Review</a>
                         </li>
-                        <li [class.active]="viewMode =='list'">
-                            <a (click)="viewMode = 'list'">List View</a>
+                        <li [class.active]="viewMode =='Chapter50'">
+                            <a (click)="viewMode = 'Chapter50'">Chapter 50 - 53</a>
+                        </li>
+                        <li [class.active]="viewMode =='Chapter56'">
+                            <a (click)="viewMode = 'Chapter56'">Chapter 56 : Zippy</a>
                         </li>
                     </ul>
+
                     <div [ngSwitch]="viewMode">
-                        <template [ngSwitchWhen]="'map'" ngSwitchDefault>Map View Content</template>
-                        <template [ngSwitchWhen]="'list'">List View Content</template>
+<!-- Chapter 41 : Code Review --> 
+                        <template [ngSwitchWhen]="'Chapter41'" ngSwitchDefault>
+                            <h4> Chapter 41 </h4>
+                            <div *ngFor="#tweet of tweets">
+                                <tweet [data]="tweet"></tweet>
+
+                            </div>
+                        </template>
+                        <template [ngSwitchWhen]="'Chapter50'" ngSwitchDefault>
+<!-- Chapter 50-53  -->
+                            <favorite [isFavorite]="post.isFavorite" 
+                                (change)="onFavoriteChange($event)"></favorite>
+                        </template>
+ <!-- Chapter 56 : Code Zippy  -->                        
+                        <template [ngSwitchWhen]="'Chapter56'">           
+                            <h4> Chapter 56 : Zippy </h4>
+                            <zippy title="Who can see my stuff?">
+                                conent of who can see my stuff
+                            </zippy>
+                            <zippy title="Who can contact me?">
+                                Content of who can contact me
+                            </zippy>
+ <!--End - Chapter 56 : Code Zippy  -->                       
+                        </template>
                     </div>
+<!-- End - Chapter 45 : ngSwitch -->   
 
 <!-- Chapter 49 : Creating Customer Pipes -->
                 <h1> Chapter 49 : Creating Customer Pipes </h1>
@@ -54,18 +74,9 @@ import { ZippyComponent } from './zippy/zippy.component';
                     <br/>
                     {{post.body | summary:100 }}
                 </div>
-<!-- Chapter 50-53  -->
-                <favorite [isFavorite]="post.isFavorite" 
-                    (change)="onFavoriteChange($event)"></favorite>
 
-  <!-- Chapter 56 : Code Zippy  -->                  
-                <h1> Chapter 56 : Zippy </h1>
-                <zippy title="Who can see my stuff?">
-                    conent of who can see my stuff
-                </zippy>
-                <zippy title="Who can contact me?">
-                    Content of who can contact me
-                </zippy>
+
+
                 
                 `,
     // directives: [CoursesComponent, FavoriteComponent]
@@ -109,6 +120,6 @@ export class AppComponent {
     }
 
     //  Chapter 45 : ngSwitch
-    viewMode='map';
+    viewMode='Chapter41';
 
 }
