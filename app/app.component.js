@@ -1,4 +1,4 @@
-System.register(['angular2/core', './favorite.component', './like.component', './voter.component', './tweet/tweet.component', './tweet/tweet.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './favorite.component', './like.component', './voter.component', './tweet/tweet.component', './tweet/tweet.service', './pipe/summary.pipe', './zippy/zippy.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './favorite.component', './like.component', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, favorite_component_1, like_component_1, voter_component_1, tweet_component_1, tweet_service_1;
+    var core_1, favorite_component_1, like_component_1, voter_component_1, tweet_component_1, tweet_service_1, summary_pipe_1, zippy_component_1;
     var AppComponent;
     return {
         setters:[
@@ -31,6 +31,12 @@ System.register(['angular2/core', './favorite.component', './like.component', '.
             },
             function (tweet_service_1_1) {
                 tweet_service_1 = tweet_service_1_1;
+            },
+            function (summary_pipe_1_1) {
+                summary_pipe_1 = summary_pipe_1_1;
+            },
+            function (zippy_component_1_1) {
+                zippy_component_1 = zippy_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -41,7 +47,9 @@ System.register(['angular2/core', './favorite.component', './like.component', '.
                         isFavorite: true,
                         //VoterComponent 
                         voteCount: 10,
-                        myVote: 0
+                        myVote: 0,
+                        // Pipe
+                        body: "\n            We're really excited about the June release of VS Code. We've made some big changes to Extension management (dedicated Extensions View) and added Tabs (tabbed editor panes). Other new features include global Search and Replace, improved Drag and Drop and optional indentation guides. All of this along with enhancements to existing features like the Integrated Terminal and delivering a set of important bug fixes.\n        "
                     };
                     //  38 Code Review
                     this.tweet = {
@@ -61,10 +69,11 @@ System.register(['angular2/core', './favorite.component', './like.component', '.
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n<!-- FavoriteComponent -->\n                <favorite [isFavorite]=\"post.isFavorite\" \n                    (change)=\"onFavoriteChange($event)\"></favorite>\n<!-- LikeComponent -->              \n                <like [totalLikes]=\"tweet.totalLikes\" [iLike]=\"tweet.iLike\"></like>\n                <br/>\n            \n<!-- Chapter 40 : Code Review -->\n                <voter \n                    [voteCount]=\"post.voteCount\"\n                    [myVote]=\"post.myVote\"\n                    (vote)=\"onVote($event)\">\n                </voter>\n<!-- Chapter 41 : Code Review -->\n                <h1> Chapter 41 </h1>\n                <div *ngFor=\"#tweet of tweets\">\n                    <tweet [data]=\"tweet\"></tweet>\n\n                </div>\n<!-- Chapter 45 : ngSwitch -->\n                <h1> Chapter 45 : ngSwitch </h1>\n\n                    <ul class=\"nav nav-pills\">\n                        <li [class.active]=\"viewMode =='map'\">\n                            <a (click)=\"viewMode = 'map'\">Map View</a>\n                        </li>\n                        <li [class.active]=\"viewMode =='list'\">\n                            <a (click)=\"viewMode = 'list'\">List View</a>\n                        </li>\n                    </ul>\n                    <div [ngSwitch]=\"viewMode\">\n                        <template [ngSwitchWhen]=\"'map'\" ngSwitchDefault>Map View Content</template>\n                        <template [ngSwitchWhen]=\"'list'\">List View Content</template>\n                    </div>\n\n\n                ",
+                        template: "\n\n<!-- LikeComponent -->              \n                <like [totalLikes]=\"tweet.totalLikes\" [iLike]=\"tweet.iLike\"></like>\n      \n<!-- Chapter 40 : Code Review -->\n                <voter \n                    [voteCount]=\"post.voteCount\"\n                    [myVote]=\"post.myVote\"\n                    (vote)=\"onVote($event)\">\n                </voter>\n<!-- Chapter 41 : Code Review -->\n                <h1> Chapter 41 </h1>\n                <div *ngFor=\"#tweet of tweets\">\n                    <tweet [data]=\"tweet\"></tweet>\n\n                </div>\n\n<!-- Chapter 45 : ngSwitch -->\n                <h1> Chapter 45 : ngSwitch </h1>\n\n                    <ul class=\"nav nav-pills\">\n                        <li [class.active]=\"viewMode =='map'\">\n                            <a (click)=\"viewMode = 'map'\">Map View</a>\n                        </li>\n                        <li [class.active]=\"viewMode =='list'\">\n                            <a (click)=\"viewMode = 'list'\">List View</a>\n                        </li>\n                    </ul>\n                    <div [ngSwitch]=\"viewMode\">\n                        <template [ngSwitchWhen]=\"'map'\" ngSwitchDefault>Map View Content</template>\n                        <template [ngSwitchWhen]=\"'list'\">List View Content</template>\n                    </div>\n\n<!-- Chapter 49 : Creating Customer Pipes -->\n                <h1> Chapter 49 : Creating Customer Pipes </h1>\n                <div>\n                    <h4>{{post.title}}</h4>\n                    <br/>\n                    {{post.body | summary:100 }}\n                </div>\n<!-- Chapter 50-53  -->\n                <favorite [isFavorite]=\"post.isFavorite\" \n                    (change)=\"onFavoriteChange($event)\"></favorite>\n\n  <!-- Chapter 56 : Code Zippy  -->                  \n                <h1> Chapter 56 : Zippy </h1>\n                <zippy title=\"Who can see my stuff?\">\n                    conent of who can see my stuff\n                </zippy>\n                <zippy title=\"Who can contact me?\">\n                    Content of who can contact me\n                </zippy>\n                \n                ",
                         // directives: [CoursesComponent, FavoriteComponent]
-                        directives: [favorite_component_1.FavoriteComponent, like_component_1.LikeComponent, voter_component_1.VoterComponent, tweet_component_1.TweetComponent],
-                        providers: [tweet_service_1.TweetService]
+                        directives: [favorite_component_1.FavoriteComponent, like_component_1.LikeComponent, voter_component_1.VoterComponent, tweet_component_1.TweetComponent, zippy_component_1.ZippyComponent],
+                        providers: [tweet_service_1.TweetService],
+                        pipes: [summary_pipe_1.SummaryPipe]
                     }), 
                     __metadata('design:paramtypes', [tweet_service_1.TweetService])
                 ], AppComponent);

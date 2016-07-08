@@ -7,16 +7,17 @@ import { VoterComponent } from './voter.component';
 import { TweetComponent } from './tweet/tweet.component';
 import { TweetService } from './tweet/tweet.service';
 
+import { SummaryPipe } from './pipe/summary.pipe';
+
+import { ZippyComponent } from './zippy/zippy.component';
+
 @Component({
     selector: 'my-app',
     template: `
-<!-- FavoriteComponent -->
-                <favorite [isFavorite]="post.isFavorite" 
-                    (change)="onFavoriteChange($event)"></favorite>
+
 <!-- LikeComponent -->              
                 <like [totalLikes]="tweet.totalLikes" [iLike]="tweet.iLike"></like>
-                <br/>
-            
+      
 <!-- Chapter 40 : Code Review -->
                 <voter 
                     [voteCount]="post.voteCount"
@@ -29,6 +30,7 @@ import { TweetService } from './tweet/tweet.service';
                     <tweet [data]="tweet"></tweet>
 
                 </div>
+
 <!-- Chapter 45 : ngSwitch -->
                 <h1> Chapter 45 : ngSwitch </h1>
 
@@ -45,11 +47,31 @@ import { TweetService } from './tweet/tweet.service';
                         <template [ngSwitchWhen]="'list'">List View Content</template>
                     </div>
 
+<!-- Chapter 49 : Creating Customer Pipes -->
+                <h1> Chapter 49 : Creating Customer Pipes </h1>
+                <div>
+                    <h4>{{post.title}}</h4>
+                    <br/>
+                    {{post.body | summary:100 }}
+                </div>
+<!-- Chapter 50-53  -->
+                <favorite [isFavorite]="post.isFavorite" 
+                    (change)="onFavoriteChange($event)"></favorite>
 
+  <!-- Chapter 56 : Code Zippy  -->                  
+                <h1> Chapter 56 : Zippy </h1>
+                <zippy title="Who can see my stuff?">
+                    conent of who can see my stuff
+                </zippy>
+                <zippy title="Who can contact me?">
+                    Content of who can contact me
+                </zippy>
+                
                 `,
     // directives: [CoursesComponent, FavoriteComponent]
-    directives: [FavoriteComponent,LikeComponent,VoterComponent,TweetComponent],
-    providers: [TweetService]
+    directives: [FavoriteComponent,LikeComponent,VoterComponent,TweetComponent,ZippyComponent],
+    providers: [TweetService],
+    pipes: [SummaryPipe]
 
 })
 export class AppComponent {
@@ -60,7 +82,12 @@ export class AppComponent {
         
         //VoterComponent 
         voteCount: 10,
-        myVote:0
+        myVote:0,
+
+        // Pipe
+        body: `
+            We're really excited about the June release of VS Code. We've made some big changes to Extension management (dedicated Extensions View) and added Tabs (tabbed editor panes). Other new features include global Search and Replace, improved Drag and Drop and optional indentation guides. All of this along with enhancements to existing features like the Integrated Terminal and delivering a set of important bug fixes.
+        `
     }
     onVote($event){
         console.log($event);
