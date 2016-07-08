@@ -26,10 +26,20 @@ System.register(['angular2/core', './auto-grow.directive'], function(exports_1, 
                     // @Input('is-favorite') isFavorite = false;
                     this.isFavorite = false;
                     this.change = new core_1.EventEmitter();
+                    this.canSave = true;
+                    this.task = {
+                        title: "Review applications",
+                        assignee: {
+                            name: "er"
+                        }
+                    };
                 }
                 FavoriteComponent.prototype.onClick = function () {
                     this.isFavorite = !this.isFavorite;
                     this.change.emit({ newValue: this.isFavorite });
+                };
+                FavoriteComponent.prototype.onSubmit = function () {
+                    this.canSave = !this.canSave;
                 };
                 __decorate([
                     core_1.Input(), 
@@ -42,6 +52,7 @@ System.register(['angular2/core', './auto-grow.directive'], function(exports_1, 
                 FavoriteComponent = __decorate([
                     core_1.Component({
                         selector: 'favorite',
+                        template: "\n        <h4>Chapter 50 : ngClass</h4>\n        <i \n            class=\"glyphicon\" \n            [ngClass]=\"{\n                'glyphicon-star-empty': !isFavorite,\n                'glyphicon-star': isFavorite\n            }\"\n            (click)=\"onClick()\">\n        </i>\n        <h4>Chapter 51 : ngStyle</h4>\n        <button\n            [ngStyle]=\"{\n                backgroundColor: canSave ? 'blue':'gray',\n                color: canSave ? 'White': 'black',\n                fontWeight: canSave ? 'bold': 'normal'\n            }\"\n            (click)=\"onSubmit()\"\n        >Submit</button>\n        <h4>Chapter 52 : Elvis Operator</h4>\n        <ul>\n            <li>Title: {{ task.title}}</li>\n            <li>Assignee to: {{task.assignee?.role?.name}}</li>\n        </ul>\n        \n    ",
                         templateUrl: 'app/favorite.template.html',
                         styles: ["\n        .glyphicon-star {\n            color: orange;\n        }\n    "],
                         directives: [auto_grow_directive_1.AutoGrowDirective]
