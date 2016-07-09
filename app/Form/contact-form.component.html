@@ -1,11 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-    
-    </body>
-</html>
+<form #f="ngForm" (ngSubmit)="onSubmit(f.form)" >
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input 
+            class="form-control"
+            ngControl="firstName"
+            #firstName="ngForm" 
+            id="firstName" 
+            type="text" 
+
+            (change)="log(firstName)" 
+            required
+            minlength="3">
+        <div *ngIf="firstName.touched && firstName.errors">
+            {{ firstName.errors | json }}
+            <div 
+                class="alert alert-danger" 
+                *ngIf="firstName.errors.required">
+                First name is required.
+            </div>
+            <div
+                class="alert alert-danger" 
+                *ngIf="firstName.errors.minlength">
+                First name shoulf be minimum {{firstName.errors.minlength.requiredLength}} characters.
+            </div> 
+        </div> 
+    </div>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea 
+            #comment="ngForm"
+            ngControl="comment" 
+            id="comment" 
+            cols="30"
+            rows="10" 
+            class="form-control"
+            required>
+        </textarea>
+        <div 
+            class="alert alert-danger" 
+            *ngIf="comment.touched && !comment.valid">
+            Comment is required.
+        </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>

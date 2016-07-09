@@ -1,10 +1,17 @@
 import { Component } from 'angular2/core';
 
 @Component({
-    selector: 'contack-form',
-    templateUrl:``
+    selector: 'contact-form',
+    templateUrl: `app/form/contact-form.component.html`
 
 })
-export class ContactFormComponent{
 
+export class ContactFormComponent {
+    log(x){
+        console.log(x)
+    }
+
+    onSubmit(form){
+        console.log(form);
+    }
 }
