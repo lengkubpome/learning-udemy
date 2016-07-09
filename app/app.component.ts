@@ -13,6 +13,8 @@ import { ZippyComponent } from './zippy/zippy.component';
 
 import { ContactFormComponent } from './form/contact-form.component';
 
+import { SignUpFormComponent } from './form/signup-form.Component';
+
 @Component({
     selector: 'my-app',
     template: `
@@ -41,6 +43,9 @@ import { ContactFormComponent } from './form/contact-form.component';
                         </li>
                         <li [class.active]="viewMode =='Chapter59'">
                             <a (click)="viewMode = 'Chapter59'">Chapter 59 : Form Contact</a>
+                        </li>
+                        <li [class.active]="viewMode =='Chapter71'">
+                            <a (click)="viewMode = 'Chapter71'">Chapter 71 : Creating Controls Explicitly</a>
                         </li>
                     </ul>
 
@@ -73,6 +78,10 @@ import { ContactFormComponent } from './form/contact-form.component';
                         <template [ngSwitchWhen]="'Chapter59'" ngSwitchDefault>
                             <contact-form></contact-form>
                         </template>
+<!-- Chapter 71  -->
+                        <template [ngSwitchWhen]="'Chapter71'" ngSwitchDefault>
+                            <signup-form></signup-form>
+                        </template>
                     </div>
 <!-- End - Chapter 45 : ngSwitch -->   
 
@@ -82,11 +91,14 @@ import { ContactFormComponent } from './form/contact-form.component';
                     <h4>{{post.title}}</h4>
                     <br/>
                     {{post.body | summary:100 }}
-                </div>                
+                </div>  
+
+                <signup-form></signup-form>              
                 `,
     // directives: [CoursesComponent, FavoriteComponent]
     directives: [FavoriteComponent, LikeComponent, VoterComponent,
-                 TweetComponent, ZippyComponent, ContactFormComponent],
+                 TweetComponent, ZippyComponent, ContactFormComponent,
+                 SignUpFormComponent],
     providers: [TweetService],
     pipes: [SummaryPipe]
 

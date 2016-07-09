@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,39 +10,38 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
-    var ContactFormComponent;
+    var core_1, common_1;
+    var SignUpFormComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             }],
         execute: function() {
-            ContactFormComponent = (function () {
-                function ContactFormComponent() {
-                    this.frequencies = [
-                        { id: 1, label: 'Daily' },
-                        { id: 2, label: 'Weekly' },
-                        { id: 3, label: 'Monthly' }
-                    ];
+            SignUpFormComponent = (function () {
+                function SignUpFormComponent() {
+                    this.form = new common_1.ControlGroup({
+                        username: new common_1.Control('', common_1.Validators.required),
+                        password: new common_1.Control('', common_1.Validators.required)
+                    });
                 }
-                ContactFormComponent.prototype.log = function (x) {
-                    console.log(x);
+                SignUpFormComponent.prototype.signup = function () {
+                    console.log(this.form.value);
                 };
-                ContactFormComponent.prototype.onSubmit = function (form) {
-                    console.log(form.value);
-                };
-                ContactFormComponent = __decorate([
+                SignUpFormComponent = __decorate([
                     core_1.Component({
-                        selector: 'contact-form',
-                        templateUrl: "app/form/contact-form.component.html"
+                        selector: 'signup-form',
+                        templateUrl: 'app/form/signup-form.component.html'
                     }), 
                     __metadata('design:paramtypes', [])
-                ], ContactFormComponent);
-                return ContactFormComponent;
+                ], SignUpFormComponent);
+                return SignUpFormComponent;
             }());
-            exports_1("ContactFormComponent", ContactFormComponent);
+            exports_1("SignUpFormComponent", SignUpFormComponent);
         }
     }
 });
-//# sourceMappingURL=contact-form.component.js.map
+//# sourceMappingURL=signup-form.Component.js.map

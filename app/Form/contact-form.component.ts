@@ -7,11 +7,17 @@ import { Component } from 'angular2/core';
 })
 
 export class ContactFormComponent {
-    log(x){
+    frequencies = [
+        { id: 1, label: 'Daily' },
+        { id: 2, label: 'Weekly' },
+        { id: 3, label: 'Monthly' }
+    ]
+
+    log(x) {
         console.log(x)
     }
 
-    onSubmit(form){
-        console.log(form);
+    onSubmit(form) {
+        console.log(form.value);
     }
 }
