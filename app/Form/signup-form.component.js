@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', './usernameValidators'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1;
+    var core_1, common_1, usernameValidators_1;
     var SignUpFormComponent;
     return {
         setters:[
@@ -19,15 +19,25 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
             },
             function (common_1_1) {
                 common_1 = common_1_1;
+            },
+            function (usernameValidators_1_1) {
+                usernameValidators_1 = usernameValidators_1_1;
             }],
         execute: function() {
             SignUpFormComponent = (function () {
-                function SignUpFormComponent() {
-                    this.form = new common_1.ControlGroup({
-                        username: new common_1.Control('', common_1.Validators.required),
-                        password: new common_1.Control('', common_1.Validators.required)
+                function SignUpFormComponent(fb) {
+                    this.form = fb.group({
+                        username: ['', common_1.Validators.compose([
+                                common_1.Validators.required,
+                                usernameValidators_1.UsernameValidators.cannotContainSpace
+                            ])],
+                        password: ['', common_1.Validators.required]
                     });
                 }
+                // form = new ControlGroup({
+                //     username: new Control('',Validators.required),
+                //     password: new Control('',Validators.required)
+                // });
                 SignUpFormComponent.prototype.signup = function () {
                     console.log(this.form.value);
                 };
@@ -36,7 +46,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                         selector: 'signup-form',
                         templateUrl: 'app/form/signup-form.component.html'
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [common_1.FormBuilder])
                 ], SignUpFormComponent);
                 return SignUpFormComponent;
             }());
