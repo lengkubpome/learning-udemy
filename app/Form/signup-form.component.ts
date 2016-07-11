@@ -11,10 +11,12 @@ export class SignUpFormComponent {
 
     constructor(fb: FormBuilder){
         this.form = fb.group({
+            //username:['Default Validator','sync Validators', 'Async Validators']
             username:['', Validators.compose([
                 Validators.required,
                 UsernameValidators.cannotContainSpace
-            ])],
+            ]),UsernameValidators.shouldBeUnique]
+            ,
             password:['',Validators.required]
         });
     }
