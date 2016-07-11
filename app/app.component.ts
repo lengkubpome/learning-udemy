@@ -91,9 +91,7 @@ import { SignUpFormComponent } from './form/signup-form.Component';
                     <h4>{{post.title}}</h4>
                     <br/>
                     {{post.body | summary:100 }}
-                </div>  
-
-                <signup-form></signup-form>              
+                </div>              
                 `,
     // directives: [CoursesComponent, FavoriteComponent]
     directives: [FavoriteComponent, LikeComponent, VoterComponent,
