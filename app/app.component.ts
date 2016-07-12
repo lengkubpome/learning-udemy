@@ -13,12 +13,16 @@ import { ZippyComponent } from './zippy/zippy.component';
 
 import { ContactFormComponent } from './form/contact-form.component';
 
-import { SignUpFormComponent } from './form/signup-form.Component';
+import { SignUpFormComponent } from './form/signup-form.component';
+import { ChangePasswordFormComponent } from './form/change-password-form.component';
 
 @Component({
     selector: 'my-app',
     template: `
 
+<!-- Chapter 80+ : Reaction -->
+                <h4>Chapter 80+ : Reaction</h4>
+                <input id="search" type="text" class="form-control" placeholder="Search...>
 <!-- LikeComponent -->              
                 <like [totalLikes]="tweet.totalLikes" [iLike]="tweet.iLike"></like>
       
@@ -46,6 +50,9 @@ import { SignUpFormComponent } from './form/signup-form.Component';
                         </li>
                         <li [class.active]="viewMode =='Chapter71'">
                             <a (click)="viewMode = 'Chapter71'">Chapter 71 : Creating Controls Explicitly</a>
+                        </li>
+                        <li [class.active]="viewMode =='Chapter80'">
+                            <a (click)="viewMode = 'Chapter80'">change-password-form</a>
                         </li>
                     </ul>
 
@@ -82,6 +89,11 @@ import { SignUpFormComponent } from './form/signup-form.Component';
                         <template [ngSwitchWhen]="'Chapter71'" ngSwitchDefault>
                             <signup-form></signup-form>
                         </template>
+
+<!-- change-password-form -->
+                        <template [ngSwitchWhen]="'Chapter80'" ngSwitchDefault>
+                            <change-password-form></change-password-form>
+                        </template>
                     </div>
 <!-- End - Chapter 45 : ngSwitch -->   
 
@@ -91,12 +103,12 @@ import { SignUpFormComponent } from './form/signup-form.Component';
                     <h4>{{post.title}}</h4>
                     <br/>
                     {{post.body | summary:100 }}
-                </div>              
+                </div>            
                 `,
     // directives: [CoursesComponent, FavoriteComponent]
     directives: [FavoriteComponent, LikeComponent, VoterComponent,
                  TweetComponent, ZippyComponent, ContactFormComponent,
-                 SignUpFormComponent],
+                 SignUpFormComponent,ChangePasswordFormComponent],
     providers: [TweetService],
     pipes: [SummaryPipe]
 
@@ -129,13 +141,32 @@ export class AppComponent {
         iLike: false
     }
 
-    // Chapter 41
-    tweets: any[];
-    constructor(tweetService: TweetService) {
-        this.tweets = tweetService.getTweet();
-    }
+    // // Chapter 41
+    // tweets: any[];
+    // constructor(tweetService: TweetService) {
+    //     this.tweets = tweetService.getTweet();
+    // }
 
     //  Chapter 45 : ngSwitch
     viewMode = 'Chapter41';
 
+    // Chaper 80+ : Reaction
+    constructor(){
+        var debounce = _.debounce(function(text){
+             var url= "https://api.spotify.com/v1/search?type=artist&q="+text;
+            $.getJSON(url,function(artists){
+                console.log(artists);
+            });
+        },400);
+
+        $("#search").keyup(function(e){
+            var text = e.target.value;
+            
+            if(text.length<3)
+                return;
+            
+            debounce(text);
+           
+        });
+    }
 }
