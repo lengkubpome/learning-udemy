@@ -59,4 +59,4 @@ System.register(['angular2/core', 'angular2/common', './usernameValidators'], fu
         }
     }
 });
-//# sourceMappingURL=signup-form.Component.js.map
+//# sourceMappingURL=signup-form.component.js.map

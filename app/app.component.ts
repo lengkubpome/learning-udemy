@@ -1,3 +1,6 @@
+/// <reference path="../typings/tsd.d.ts" />
+
+
 import {Component} from 'angular2/core';
 import { CoursesComponent } from './courses.component';
 import { FavoriteComponent } from './favorite.component';
@@ -16,13 +19,10 @@ import { ContactFormComponent } from './form/contact-form.component';
 import { SignUpFormComponent } from './form/signup-form.component';
 import { ChangePasswordFormComponent } from './form/change-password-form.component';
 
+
 @Component({
     selector: 'my-app',
     template: `
-
-<!-- Chapter 80+ : Reaction -->
-                <h4>Chapter 80+ : Reaction</h4>
-                <input id="search" type="text" class="form-control" placeholder="Search...>
 <!-- LikeComponent -->              
                 <like [totalLikes]="tweet.totalLikes" [iLike]="tweet.iLike"></like>
       
@@ -107,8 +107,8 @@ import { ChangePasswordFormComponent } from './form/change-password-form.compone
                 `,
     // directives: [CoursesComponent, FavoriteComponent]
     directives: [FavoriteComponent, LikeComponent, VoterComponent,
-                 TweetComponent, ZippyComponent, ContactFormComponent,
-                 SignUpFormComponent,ChangePasswordFormComponent],
+        TweetComponent, ZippyComponent, ContactFormComponent,
+        SignUpFormComponent, ChangePasswordFormComponent],
     providers: [TweetService],
     pipes: [SummaryPipe]
 
@@ -141,32 +141,13 @@ export class AppComponent {
         iLike: false
     }
 
-    // // Chapter 41
-    // tweets: any[];
-    // constructor(tweetService: TweetService) {
-    //     this.tweets = tweetService.getTweet();
-    // }
+    // Chapter 41
+    tweets: any[];
+    constructor(tweetService: TweetService) {
+        this.tweets = tweetService.getTweet();
+    }
 
     //  Chapter 45 : ngSwitch
-    viewMode = 'Chapter41';
+    viewMode = 'Chapter41';    
 
-    // Chaper 80+ : Reaction
-    constructor(){
-        var debounce = _.debounce(function(text){
-             var url= "https://api.spotify.com/v1/search?type=artist&q="+text;
-            $.getJSON(url,function(artists){
-                console.log(artists);
-            });
-        },400);
-
-        $("#search").keyup(function(e){
-            var text = e.target.value;
-            
-            if(text.length<3)
-                return;
-            
-            debounce(text);
-           
-        });
-    }
 }
